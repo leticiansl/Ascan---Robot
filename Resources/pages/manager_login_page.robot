@@ -43,6 +43,11 @@ Cliente é exibido
     Page Should Contain    ${CUSTOMER.FirstName}
     Page Should Contain    ${CUSTOMER.LastName}
 
+Seleciono um cliente
+    [Arguments]      &{CUSTOMER}
+    Wait Until Element Is Visible    ${manager.sel_Customer}    ${gen.Timeout}
+    Select From List By Label        ${manager.sel_Customer}    ${CUSTOMER.FirstName} ${CUSTOMER.LastName}
+
 ###  TM 01 - Cadastrar cliente 
 Quando clico para adicionar um cliente
     Click Element    ${manager.bt_AddCustomer}
@@ -59,6 +64,7 @@ E clico para confirmar o cadastro do cliente
 Então o alerta de cadastro sucedido é exibido
     ${alertMessage}=   Handle Alert   
     Should Contain   ${alertMessage}           ${manager.msg_CustomerAdded}
+
 E o cliente é exibido na aba Customers
     Quando clico para visualizar os clientes
     Pesquiso o nome do cliente    ${data_newCustomer.FirstName}
@@ -69,8 +75,10 @@ Quando clico para abrir uma conta
     Click Element    ${manager.bt_OpenAccount}
 
 E seleciono um cliente
-    Wait Until Element Is Visible    ${manager.sel_Customer}    ${gen.Timeout}
-    Select From List By Label        ${manager.sel_Customer}    ${data_Customer.FirstName} ${data_Customer.LastName}
+    Seleciono um cliente             &{data_Customer}
+
+E seleciono o cliente criado
+    Seleciono um cliente             &{data_newCustomer}
 
 E seleciono uma moeda
     Wait Until Element Is Visible    ${manager.sel_Currency}    ${gen.Timeout}

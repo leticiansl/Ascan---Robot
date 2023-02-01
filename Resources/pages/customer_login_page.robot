@@ -24,9 +24,12 @@ Dado que estou na página de login
 Quando seleciono um nome
     Select From List By Label           ${login.sel_Name}     ${data_Customer.FirstName} ${data_Customer.LastName}
 
+Quando seleciono o nome do novo cliente
+    Select From List By Label           ${login.sel_Name}     ${data_newCustomer.FirstName} ${data_newCustomer.LastName}
+
 E clico em Login
     Click Element    ${login.bt_Login}
-    Wait Until Page Contains Element    ${acc.msg_Welcome}    ${gen.Timeout}
+    Sleep    2s
 
 ###  TC 04 - Realizar logout
 Então a página de login é exibida

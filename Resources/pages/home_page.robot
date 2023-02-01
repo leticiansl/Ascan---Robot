@@ -9,6 +9,9 @@ Resource    ../main.robot
 ...    bt_BankManagerLogin=//button[contains(.,'Bank Manager Login')]
 
 *** Keywords ***
+Clicar em Home
+    Click Element    locator=${home.bt_Home}
+    
 Clicar em Customer Login
     Click Element    locator=${home.bt_CustomerLogin}
 

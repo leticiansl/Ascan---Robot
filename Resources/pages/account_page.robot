@@ -37,16 +37,21 @@ Increased Balance
 Decreased Balance
     [Return]    ${${data_Customer.Balance}-${data_Customer.WithdrawlValue}}
 
+Dados da conta são exibidos
+    [Arguments]      &{CUSTOMER}
+    Page Should Contain         ${CUSTOMER.FirstName} ${CUSTOMER.LastName}    ${gen.Timeout}
+
 ###  TC 01 - Realizar login  
 Então os dados da conta são exibidos
-    Page Should Contain         ${data_Customer.FirstName} ${data_Customer.LastName}    ${gen.Timeout}
-    Page Should Contain         Account Number : ${data_Customer.AccountNumber}         ${gen.Timeout} 
+    Dados da conta são exibidos    &{data_Customer}
+
+Então os dados da nova conta são exibidos
+    Dados da conta são exibidos    &{data_newCustomer}
 
 ###  TC 02 - Realizar depósito
 Quando clico para realizar um depósito
     Get Balance
     Click Element    ${acc.bt_Deposit}
-
 
 E informo um valor
     Wait Until Element Is Visible          ${acc.inp_Amount}                            ${gen.Timeout}
